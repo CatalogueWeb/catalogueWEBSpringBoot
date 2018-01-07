@@ -2,26 +2,36 @@ package catalogue.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Produit_Commande")
+@Access(AccessType.FIELD)
+@IdClass(Produit_CommandeEntityId.class)
 public class Produit_CommandeEntity implements Serializable {
+	/**
+	 * 
+	 */
+	//private static final long serialVersionUID = 1L;
+
 	private int quantite;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="produit_id")
+	@JoinColumn(name="id_produit")
 	private ProduitEntity produit;
 	
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="commande_client_id")
+	@JoinColumn(name="id_commande")
 	private Commande_ClientEntity  commande_client;
 
 
@@ -48,7 +58,7 @@ public class Produit_CommandeEntity implements Serializable {
 		this.quantite = quantite;
 	}
 
-
+	
 	public ProduitEntity getProduit() {
 		return produit;
 	}
@@ -58,7 +68,7 @@ public class Produit_CommandeEntity implements Serializable {
 		this.produit = produit;
 	}
 
-
+	
 	public Commande_ClientEntity getCommande_client() {
 		return commande_client;
 	}

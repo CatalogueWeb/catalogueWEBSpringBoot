@@ -2,6 +2,8 @@ package catalogue.entity;
 
 import java.util.Set;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,24 +14,27 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Client")
+@Access(AccessType.FIELD)
 public class ClientEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private int id_client;
 	private String nom;
 	private String email;
 	private String telephone;
 	private String adresse;
 	
-	@OneToMany(mappedBy = "bookCategory", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private Set<Commande_ClientEntity> commandes_client;
 
-	public int getId() {
-		return id;
+	
+
+	public int getId_client() {
+		return id_client;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_client(int id_client) {
+		this.id_client = id_client;
 	}
 
 	public String getNom() {
@@ -64,6 +69,7 @@ public class ClientEntity {
 		this.adresse = adresse;
 	}
 
+	
 	public Set<Commande_ClientEntity> getCommandes_client() {
 		return commandes_client;
 	}
@@ -75,7 +81,7 @@ public class ClientEntity {
 	public ClientEntity(int id, String nom, String email, String telephone, String adresse,
 			Set<Commande_ClientEntity> commandes_client) {
 		super();
-		this.id = id;
+		this.id_client = id;
 		this.nom = nom;
 		this.email = email;
 		this.telephone = telephone;
